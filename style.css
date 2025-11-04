@@ -1,0 +1,58 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: white;
+    color: #333;
+    margin: 40px;
+    max-width: 600px;
+}
+
+h1 {
+    text-align: center;
+    color: #000;
+
+}
+
+.label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    margin-top: 8px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #aaa;
+    resize: none;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color:#aaa;
+
+}
+
+#status {
+    margin-top: 10px;
+    color: green;
+    font-weight: bold;
+
+}
+
+:focus {
+    outline: 3px solid #ffcc00;
+
+}
