@@ -1,3 +1,5 @@
+
+// Message for data found in storage
 window.addEventListener("load", ()=> {
     const savedData = localStorage.getItem("personalData");
     const textarea = document.getElementById("personalData");
@@ -9,12 +11,14 @@ window.addEventListener("load", ()=> {
     }
 });
 
+// Message for data entered is automatically saved
 document.getElementById("personalData").addEventListener("input", (event) => {
     const value = event.target.value;
     localStorage.setItem("personalData", value);
     showStatus("Data saved automatically.");
 });
 
+// Message for users changes is automatically saved
 document.getElementById("saveBtn").addEventListener("click", () => {
     const value = document.getElementById("personalData").value;
     localStorage.setItem("personalData", value);
