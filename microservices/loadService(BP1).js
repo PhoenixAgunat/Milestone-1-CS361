@@ -1,3 +1,6 @@
+// Our first big pool microservice: loadService
+// Description: This service handles loading personal data from a JSON file.
+
 const http = require('http');
 const fs = require('fs');
 const path = require('path');

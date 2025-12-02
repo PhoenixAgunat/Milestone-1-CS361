@@ -1,3 +1,6 @@
+// Our second big pool microservice: saveService
+// Description: This service handles saving personal data to a JSON file.
+
 
 const http = require('http');
 const fs = require('fs');
@@ -16,9 +19,9 @@ function sendJson(res, statusCode, data) {
     res.end(JSON.stringify(data));
 }
 
-const server = http = http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
     if (req.method === 'OPTIONS') {
-        sendJson(res, 204, {
+        res.writeHead(res, 204, {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
@@ -55,11 +58,13 @@ const server = http = http.createServer((req, res) => {
                         data: dataToStore
                     });
                 });
+
                 } catch (e) {
                     console.error('[saveService] Error parsing JSON:', e);
                     sendJson(res, 400, { error: "Invalid JSON format." });  
                 }
             });
+
             } else {
                 sendJson(res, 404, { error: "Not Found" });
     }
