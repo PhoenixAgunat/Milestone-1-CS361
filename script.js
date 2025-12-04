@@ -1,4 +1,8 @@
-const { text } = require("stream/consumers");
+// Phoenix Agunat
+// Date: November 28, 2025
+// Class: CS362
+// Main application script to interact with saveService, loadService, updateService, and notesService.
+
 
 const textarea = document.getElementById('personalData');
 const saveBtn = document.getElementById('saveBtn');
@@ -10,7 +14,7 @@ const noteOutput = document.getElementById('noteOutput');
 const SAVE_URL = 'http://localhost:3001/save';
 const LOAD_URL = 'http://localhost:3002/load';
 const UPDATE_URL = 'http://localhost:3003/update';
-const NOTES_URL = 'http://localhost:3004/notes';
+const NOTES_URL = 'http://localhost:3004/note';
 
 window.addEventListener("load", loadData);
 
@@ -44,7 +48,7 @@ textarea.addEventListener("input", async () => {
 });
 
 saveBtn.addEventListener("click", async () => {
-    const valye = textarea.value;
+    const value = textarea.value;
 
     try {
         const res = await fetch(SAVE_URL, {

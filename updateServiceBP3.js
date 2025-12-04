@@ -1,3 +1,6 @@
+// Phoenix Agunat
+// Date: November 28, 2025
+// Class: CS362
 // our third big pool microservice: updateService
 // Description: This service handles updating personal data in a JSON file.
 

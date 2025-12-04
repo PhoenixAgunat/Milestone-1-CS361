@@ -1,6 +1,8 @@
+// Phoenix Agunat
+// Date: November 28, 2025
+// Class: CS362
 // Our second big pool microservice: saveService
 // Description: This service handles saving personal data to a JSON file.
-
 
 const http = require('http');
 const fs = require('fs');
@@ -20,15 +22,18 @@ function sendJson(res, statusCode, data) {
 }
 
 const server = http.createServer((req, res) => {
+
+    // Handle CORS preflight
     if (req.method === 'OPTIONS') {
-        res.writeHead(res, 204, {
+        res.writeHead(204, {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
         });
-      return res.end();
+        return res.end();
     }
 
+    // Handle POST /save
     if (req.method === 'POST' && req.url === '/save') {
         let body = '';
 
@@ -46,26 +51,31 @@ const server = http.createServer((req, res) => {
                     updatedAt: new Date().toISOString()
                 };
 
-                fs.writeFile(DATA_FILE, JSON.stringify(dataToStore, null, 2), (err) => {
+                fs.writeFile(DATA_FILE, JSON.stringify(dataToStore, null, 2), err => {
                     if (err) {
                         console.error('[saveService] Error writing file:', err);
-                        return sendJson(res, 500, { error: "Failed to save data." });
+                        return sendJson(res, 500, { error: 'Failed to save data.' });
                     }
 
                     console.log('[saveService] Data saved successfully.');
-                    sendJson(res, 200, { 
-                        message: "Data saved successfully.",
+                    sendJson(res, 200, {
+                        message: 'Data saved successfully.',
                         data: dataToStore
                     });
                 });
 
-                } catch (e) {
-                    console.error('[saveService] Error parsing JSON:', e);
-                    sendJson(res, 400, { error: "Invalid JSON format." });  
-                }
-            });
+            } catch (e) {
+                console.error('[saveService] Error parsing JSON:', e);
+                return sendJson(res, 400, { error: 'Invalid JSON format.' });
+            }
+        });
 
-            } else {
-                sendJson(res, 404, { error: "Not Found" });
+    } else {
+        // Fallback for routes not found
+        sendJson(res, 404, { error: 'Not Found' });
     }
+});
+
+server.listen(PORT, () => {
+    console.log(`[saveService] Listening on port ${PORT}`);
 });
